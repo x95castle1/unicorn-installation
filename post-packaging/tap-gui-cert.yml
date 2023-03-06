@@ -1,0 +1,36 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: tap-gui-cert
+  namespace: tap-install
+spec:
+  subject:
+    countries:
+    - US
+    provinces:
+    - California
+    localities:
+    - San Fransisco
+    organizations:
+    - vmware
+    organizationalUnits:
+    - vmware mambg
+  secretName: tap-gui-cert
+  isCA: false
+  dnsNames:
+  - tap-gui.learn.tapsme.org
+  - server.tap-gui.svc
+  - server.tap-gui.svc.cluster.local
+  issuerRef:
+    name: letsencrypt-production
+---
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: tap-gui-cert-delegation
+  namespace: tap-install
+spec:
+  delegations:
+    - secretName: tap-gui-cert
+      targetNamespaces:
+      - "*"
