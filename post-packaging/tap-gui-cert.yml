@@ -20,6 +20,7 @@ spec:
   dnsNames:
   - tap-gui.learn.tapsme.org
   issuerRef:
+    kind: ClusterIssuer
     name: letsencrypt-production
 ---
 apiVersion: projectcontour.io/v1
