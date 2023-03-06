@@ -19,8 +19,6 @@ spec:
   isCA: false
   dnsNames:
   - tap-gui.learn.tapsme.org
-  - server.tap-gui.svc
-  - server.tap-gui.svc.cluster.local
   issuerRef:
     name: letsencrypt-production
 ---
