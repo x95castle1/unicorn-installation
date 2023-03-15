@@ -13,7 +13,8 @@ spec:
     refName: tap.tanzu.vmware.com
     versionSelection:
       constraints: ">1.0.0"
-      prereleases: {}
+      prereleases:
+        identifiers: [rc]
   serviceAccountName: tap-tap-install-sa
   values:
   - secretRef:
