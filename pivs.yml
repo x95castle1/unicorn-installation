@@ -1,0 +1,19 @@
+apiVersion: app-scanning.apps.tanzu.vmware.com/v1alpha1
+kind: ImageVulnerabilityScan
+metadata:
+  name: prisma-image-scan
+  namespace: dev2
+spec:
+  image: projects.registry.vmware.com/library/helloworldv2@sha256:27c13a31dd27fb0c764435b3781102270f107b231edc61462a59cfdf723e74c4
+  scanResults:
+    location: tapsme/scan-results
+  serviceAccountNames:
+    scanner: default
+    publisher: default
+  steps:
+  - name: scan
+    image: projects.registry.vmware.com/tanzu_practice/tap-scanners/prisma_scan_template@sha256:ede11812999799a15d004a88668d0bbd5ed98b222b91f33eece9919f9dca047
+    command: ["/bin/bash"]
+    args:
+    - c
+    - ./image/scan-image.sh /workspace /workspace/scan.xml
