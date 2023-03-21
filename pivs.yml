@@ -4,9 +4,13 @@ metadata:
   name: prisma-image-scan
   namespace: dev2
 spec:
+  workspace:
+    bindings:
+    - name: scratch
+      emptyDir: {}  
   image: projects.registry.vmware.com/library/helloworldv2@sha256:27c13a31dd27fb0c764435b3781102270f107b231edc61462a59cfdf723e74c4
   scanResults:
-    location: tapsme/scan-results
+    location: castleje119/scan-results
   serviceAccountNames:
     scanner: default
     publisher: default
@@ -16,8 +20,14 @@ spec:
     script: |
       #!/usr/bin/env /bin/bash
       cd /
-      ./image/scan-image.sh /workspace /workspace/scan.xml
+      ./image/scan-image.sh $(workspaces.scratch.path) $(workspaces.scratch.path)/scan.xml
+      mv $(workspaces.scratch.path)/scan.xml $(params.scan-results-path)/scan.xml
+    securityContext:
+      runAsUser: 0
+      privileged: true
     env:
+    - name: IMAGE
+      value: $(params.image)
     - name: SSL_CERT_DIR
       value: /etc/pki/tls/certs:/ca-cert-secret
     - name: ADDRESS
