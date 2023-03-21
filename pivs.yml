@@ -12,8 +12,33 @@ spec:
     publisher: default
   steps:
   - name: scan
-    image: projects.registry.vmware.com/tanzu_practice/tap-scanners/prisma_scan_template@sha256:ede11812999799a15d004a88668d0bbd5ed98b222b91f33eece9919f9dca047
-    command: ["/bin/bash"]
-    args:
-    - c
-    - ./image/scan-image.sh /workspace /workspace/scan.xml
+    image: projects.registry.vmware.com/tanzu_practice/tap-scanners-package/prisma-repo-scanning-bundle@sha256:ede11812999799a15d004a88668d0bbd5ed98b222b91f33eece9919f9dca0473
+    script: |
+      #!/usr/bin/env /bin/bash
+      cd /
+      ./image/scan-image.sh /workspace /workspace/scan.xml
+    env:
+    - name: SSL_CERT_DIR
+      value: /etc/pki/tls/certs:/ca-cert-secret
+    - name: ADDRESS
+      value: https://us-west1.cloud.twistlock.com/us-4-161033339
+    - name: TOKEN
+      valueFrom:
+        secretKeyRef:
+          key: prisma_token
+          name: prisma-token
+          optional: true
+    - name: USER_NAME
+      valueFrom:
+        secretKeyRef:
+          key: username
+          name: prisma-access-key-secret
+          optional: true
+    - name: PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: password
+          name: prisma-access-key-secret
+          optional: true
+    - name: DEBUG_MODE_ON
+      value: "true"
