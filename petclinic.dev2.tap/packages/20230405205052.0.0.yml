@@ -1,0 +1,25 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: petclinic.dev2.tap.20230405205052.0.0
+spec:
+  refName: petclinic.dev2.tap
+  version: 20230405205052.0.0
+  releaseNotes: |
+    Release v20230405205052.0.0 of package petclinic.dev2.tap
+  template:
+    spec:
+      fetch:
+      - imgpkgBundle:
+          image: registry.harbor.learn.tapsme.org/unicorn-full/petclinic-dev2-bundle@sha256:ae864392538f5b090f0f4ae8728ead74df7b1372cc4712d83c3fb7de6c8059a8
+      template:
+      - ytt:
+          paths:
+          - .
+      - kbld:
+          paths:
+          - .imgpkg/images.yml
+          - '-'
+      deploy:
+      - kapp: {}
+
