@@ -29,7 +29,7 @@ subjects:
   namespace: #@ data.values.name
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
   annotations:
     kapp.k14s.io/change-group: "rbac"
