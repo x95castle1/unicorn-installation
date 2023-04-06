@@ -2,7 +2,7 @@ apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
   name: petclinic-pkg-app
-  namespace: tap-install
+  namespace: dev2
 spec:
   serviceAccountName: tap-install-sa
   fetch:

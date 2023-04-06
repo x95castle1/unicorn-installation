@@ -2,7 +2,7 @@
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
-  name: app
+  name: petclinic
 spec:
   serviceAccountName: tap-tap-install-sa
   packageRef:
