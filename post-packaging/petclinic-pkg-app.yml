@@ -12,6 +12,12 @@ spec:
       subPath: petclinic.dev2.tap/packages
       secretRef: 
         name: tap-install-gitops-ssh
+  - git:
+      url: ssh://git@github.com/x95castle1/unicorn-installation
+      ref: origin/main
+      subPath: petclinic.dev2.tap/prod
+      secretRef: 
+        name: tap-install-gitops-ssh-too
   template:
   - ytt: {}
   deploy:
