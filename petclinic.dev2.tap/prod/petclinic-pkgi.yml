@@ -1,0 +1,11 @@
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: app
+spec:
+  serviceAccountName: tap-tap-install-sa
+  packageRef:
+    refName: petclinic.dev2.tap
+    versionSelection:
+      constraints: ">=0.0.0"
