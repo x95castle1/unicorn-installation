@@ -4,7 +4,7 @@ kind: PackageInstall
 metadata:
   name: petclinic
 spec:
-  serviceAccountName: tap-tap-install-sa
+  serviceAccountName: default
   packageRef:
     refName: petclinic.dev2.tap
     versionSelection:
